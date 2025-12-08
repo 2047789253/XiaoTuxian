@@ -20,8 +20,12 @@ const getHotAPI = () => {
     url: '/home/hot'
   })
 }
-
-export { getBannerAPI, findNewAPI, getHotAPI }
+const getGoodsAPI = () => {
+  return httpInstance({
+    url: '/home/goods'
+  })
+}
+export { getBannerAPI, findNewAPI, getHotAPI, getGoodsAPI }
 /**
  * @description: 获取人气推荐
  * @param {*}
