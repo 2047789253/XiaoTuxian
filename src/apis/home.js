@@ -15,4 +15,15 @@ const findNewAPI = () => {
     url: '/home/new'
   })
 }
-export { getBannerAPI, findNewAPI }
+const getHotAPI = () => {
+  return httpInstance({
+    url: '/home/hot'
+  })
+}
+
+export { getBannerAPI, findNewAPI, getHotAPI }
+/**
+ * @description: 获取人气推荐
+ * @param {*}
+ * @return {*}
+ */
