@@ -1,8 +1,10 @@
 import httpInstance from '@/utils/request'
 
-function getBannerAPI() {
+function getBannerAPI(params = {}) {
+  const { distributionSite = '1' } = params
   return httpInstance({
-    url: '/home/banner'
+    url: '/home/banner',
+    params: { distributionSite }
   })
 }
 /**
