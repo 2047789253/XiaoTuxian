@@ -5,4 +5,14 @@ function getBannerAPI() {
     url: '/home/banner'
   })
 }
-export { getBannerAPI }
+/**
+ * @description: 获取新鲜好物
+ * @param {*}
+ * @return {*}
+ */
+const findNewAPI = () => {
+  return httpInstance({
+    url: '/home/new'
+  })
+}
+export { getBannerAPI, findNewAPI }
