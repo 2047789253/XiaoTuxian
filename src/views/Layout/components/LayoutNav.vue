@@ -1,13 +1,19 @@
-<script setup></script>
+<script setup>
+import { useUserStore } from '@/stores/use'
+const userStore = useUserStore()
+</script>
 
 <template>
   <nav class="app-topnav">
     <div class="container">
       <ul>
         <!-- 多模板渲染 -->
-        <template v-if="false">
+        <template v-if="userStore.userInfo.token">
           <li>
-            <a href="javascript:; "><i class="iconfont icon-user"></i>周杰伦</a>
+            <a href="javascript:; "
+              ><i class="iconfont icon-user"></i
+              >{{ userStore.userInfo.account }}</a
+            >
           </li>
           <li>
             <el-popconfirm
