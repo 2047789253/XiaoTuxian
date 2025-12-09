@@ -24,7 +24,7 @@ const skuChange = (sku) => {
 //count
 const count = ref(1)
 const countChange = (count) => {
-  console.log('当前购买数量', count)
+  console.log(count)
 }
 //添加购物车
 const addCart = () => {
