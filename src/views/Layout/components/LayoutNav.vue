@@ -1,6 +1,17 @@
 <script setup>
 import { useUserStore } from '@/stores/use'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const userStore = useUserStore()
+const confirm = () => {
+  //1.清除用户信息 触发action
+  userStore.clearUserInfo()
+  //2.跳转登录页
+  //注意：这里不能用this.$router 因为setup没有this
+  //需要用组合式API useRouter
+  //但这里已经有路由实例了 可以直接用router
+  router.push('/login')
+}
 </script>
 
 <template>
@@ -17,6 +28,7 @@ const userStore = useUserStore()
           </li>
           <li>
             <el-popconfirm
+              @confirm="confirm"
               title="确认退出吗?"
               confirm-button-text="确认"
               cancel-button-text="取消"
