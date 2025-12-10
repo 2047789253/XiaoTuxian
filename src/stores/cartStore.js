@@ -30,6 +30,11 @@ export const useCartStore = defineStore(
       const idx = cartList.value.findIndex((item) => item.skuId === skuId)
       cartList.value.splice(idx, 1)
     }
+    //单选功能
+    const singleCheck = (skuId, selected) => {
+      const item = cartList.value.find((item) => item.skuId === skuId)
+      item.selected = selected
+    }
     //计算属性
     //1.总的数量
     const allCount = computed(() => {
@@ -43,6 +48,7 @@ export const useCartStore = defineStore(
       cartList,
       addCart,
       deleteCart,
+      singleCheck,
       allCount,
       allPrice
     }
