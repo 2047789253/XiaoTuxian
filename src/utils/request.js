@@ -7,7 +7,7 @@ const baseURL = 'http://pcapi-xiaotuxian-front-devtest.itheima.net'
 
 const httpInstance = axios.create({
   baseURL,
-  timeout: 5000
+  timeout: 50000
 })
 
 // axios请求拦截器
