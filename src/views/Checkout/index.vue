@@ -1,6 +1,11 @@
 <script setup>
 import { getCheckoutInfoAPI } from '@/apis/checkout.js'
 import { onMounted, ref } from 'vue'
+import { createOrderAPI } from '@/apis/checkout.js'
+import { useRouter } from 'vue-router'
+import { useCartStore } from '@/stores/cartStore.js'
+const cartStore = useCartStore()
+const router = useRouter()
 const checkInfo = ref({}) // 订单对象
 const curAddress = ref({}) // 默认地址对象
 
@@ -28,6 +33,29 @@ const confirm = () => {
   curAddress.value = activeAddress.value
   showDialog.value = false
   activeAddress.value = {}
+}
+//创建订单
+const createOrder = async () => {
+  const res = await createOrderAPI({
+    deliveryTimetype: 1,
+    payType: 1,
+    payChannel: 1,
+    buyerMessage: '',
+    goods: checkInfo.value.goods.map((i) => {
+      return {
+        skuId: i.skuId,
+        count: i.count
+      }
+    }),
+    addressId: curAddress.value.id
+  })
+  const orderId = res.result.id
+  router.push({
+    path: '/pay',
+    query: { id: orderId }
+  })
+  //更新购物车
+  cartStore.updateNewList()
 }
 </script>
 
@@ -77,7 +105,7 @@ const confirm = () => {
                 <th width="170">实付</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody v-if="checkInfo.goods">
               <tr v-for="i in checkInfo.goods" :key="i.id">
                 <td>
                   <a href="javascript:;" class="info">
@@ -138,7 +166,9 @@ const confirm = () => {
         </div>
         <!-- 提交订单 -->
         <div class="submit">
-          <el-button type="primary" size="large">提交订单</el-button>
+          <el-button @click="createOrder" type="primary" size="large"
+            >提交订单</el-button
+          >
         </div>
       </div>
     </div>
