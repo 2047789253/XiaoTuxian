@@ -3,7 +3,7 @@ import { getOrderAPI } from '@/apis/pay'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
-import { useCountDown } from '@composables/useCountDown'
+import { useCountDown } from '@/composables/useCountDown'
 const { formatTime, start } = useCountDown()
 
 //获取订单数据
